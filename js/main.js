@@ -115,3 +115,32 @@
     
 })(jQuery);
 
+
+
+const snowContainer = document.getElementById("snow-container");
+
+// Function to create snowflakes
+function createSnowflake() {
+  const snowflake = document.createElement("div");
+  const size = Math.random() * 3 + 3; // Random size between 5px and 10px
+
+  // Add the snowflake class and style it dynamically
+  snowflake.classList.add("snowflake");
+  snowflake.style.width = `${size}px`;
+  snowflake.style.height = `${size}px`;
+  snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+  snowflake.style.animationDuration = `${Math.random() * 3 + 5}s`; // Random speed
+  snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Random transparency
+
+  // Add snowflake to the container
+  snowContainer.appendChild(snowflake);
+
+  // Remove snowflake after animation ends to free up memory
+  snowflake.addEventListener("animationend", () => {
+    snowflake.remove();
+  });
+}
+
+// Generate snowflakes at regular intervals
+setInterval(createSnowflake, 50);
+
