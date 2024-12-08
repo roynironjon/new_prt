@@ -9984,8 +9984,7 @@ h6,
 }
 
 
- /* Snow Container */
- #snow-container {
+#snow-container {
   position: fixed;
   top: 0;
   left: 0;

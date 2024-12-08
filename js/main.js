@@ -117,30 +117,38 @@
 
 
 
+
+
+
 const snowContainer = document.getElementById("snow-container");
+  const maxSnowflakes = 50; // Limit the total number of snowflakes
+  let snowflakeCount = 0; // Counter for active snowflakes
 
-// Function to create snowflakes
-function createSnowflake() {
-  const snowflake = document.createElement("div");
-  const size = Math.random() * 3 + 3; // Random size between 5px and 10px
+  // Function to create snowflakes
+  function createSnowflake() {
+    if (snowflakeCount >= maxSnowflakes) return; // Stop creating new snowflakes if the limit is reached
 
-  // Add the snowflake class and style it dynamically
-  snowflake.classList.add("snowflake");
-  snowflake.style.width = `${size}px`;
-  snowflake.style.height = `${size}px`;
-  snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal position
-  snowflake.style.animationDuration = `${Math.random() * 3 + 5}s`; // Random speed
-  snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Random transparency
+    const snowflake = document.createElement("div");
+    const size = Math.random() * 3 + 3; // Random size between 5px and 10px
 
-  // Add snowflake to the container
-  snowContainer.appendChild(snowflake);
+    // Add the snowflake class and style it dynamically
+    snowflake.classList.add("snowflake");
+    snowflake.style.width = `${size}px`;
+    snowflake.style.height = `${size}px`;
+    snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+    snowflake.style.animationDuration = `${Math.random() * 3 + 5}s`; // Random speed
+    snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Random transparency
 
-  // Remove snowflake after animation ends to free up memory
-  snowflake.addEventListener("animationend", () => {
-    snowflake.remove();
-  });
-}
+    // Add snowflake to the container
+    snowContainer.appendChild(snowflake);
+    snowflakeCount++; // Increment the counter
 
-// Generate snowflakes at regular intervals
-setInterval(createSnowflake, 50);
+    // Remove snowflake after animation ends to free up memory
+    snowflake.addEventListener("animationend", () => {
+      snowflake.remove();
+      snowflakeCount--; // Decrement the counter
+    });
+  }
 
+  // Generate snowflakes at regular intervals
+  setInterval(createSnowflake, 200); // Adjust interval to control the creation rate
